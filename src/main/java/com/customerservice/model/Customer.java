@@ -13,7 +13,7 @@ public class Customer {
 	@Id
 	String customerId;
 	String customerName;
-	Address address;
+	String address;
 	CustomerType customerType;
 	//other details
 	
@@ -29,10 +29,10 @@ public class Customer {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public Address getAddress() {
+	public String getAddress() {
 		return address;
 	}
-	public void setAddress(Address address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	public CustomerType getCustomerType() {

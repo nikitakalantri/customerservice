@@ -1,4 +1,4 @@
-package com.productservice.service.impl;
+package com.customerservice.service.impl;
 
 import javax.validation.Valid;
 
