@@ -1,0 +1,127 @@
+swagger: '2.0'
+info:
+  description: >-
+    The Customer Service API  provides a means to create new users for the ecommerce platform, get user information, update the user information<br>
+  version: '1.0'
+  x-released: yes
+  x-visibility: internal
+  title: Customer Service
+basePath: /api/customerservice
+schemes:
+  - http
+tags:
+  - name: Customer Service
+    description: Customer Service Controller
+    
+paths:
+  '/customers/{customerId}':
+    get:
+      summary: fetch customer details
+      produces:
+        - application/json   
+      parameters:
+        - name: customerId
+          in: path
+          description: customerId - Unique identifier of customer.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Customer'
+    put:
+      summary: update customer details
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: customerId
+          in: path
+          description: customerId - Unique identifier of customer.
+          required: true
+          type: string
+        - in: body
+          name: customer
+          description: customer - Customer in JSON format
+          required: true
+          schema:
+            $ref: '#/definitions/Customer'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Customer'
+      
+  '/customers':
+    post:
+      summary: add new customer
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: customer
+          description: customer - Customer in JSON format
+          required: true
+          schema:
+            $ref: '#/definitions/Customer'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+  
+definitions:
+  Customer:
+    type: object
+    required:
+    - "customerName"
+    - "address"
+    - "customerType"
+    properties:
+      customerId:
+        type: string
+        example: "C1"
+        description: customerId - generated Id for the customer to be added.
+      customerName:
+        type: string
+        description: Name of the customer.
+      customerType:
+        description: type of customer - buyer or seller.
+        type: "string"
+        enum:
+          - BUYER
+          - SELLER
+        example: "SELLER"
+      address:
+        $ref: '#/definitions/Address'
+  
+  Address:
+    type: object
+    properties:
+      addressLine1:
+        type: string
+        example: "Abc street"
+      addressLine2:
+        type: string
+        example: "Xyz lane"
+      city:
+        type: "string"
+        example: "Pune"
+      state:
+        type: string
+        example: "Maharashtra"
+      country:
+        type: string
+        example: "India"
+      pincode:
+        type: string
+        example: "411045"
+        
